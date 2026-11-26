@@ -1,0 +1,27 @@
+pipeline:
+  id: pipeline_oyasuminet_Kakinmeter_build_8573
+  name: pipeline_oyasuminet_Kakinmeter_build_8573
+  stages:
+    - name: Syntax Check
+      id: syntax_check
+      runtime: cloud
+      platform:
+        os: linux
+        arch: amd64
+      clone:
+        enabled: true
+      cache:
+        enabled: true
+      steps:
+        - name: Verify Python Syntax
+          id: verify_python_syntax
+          run:
+            shell: bash
+            script: |-
+              set -e
+              CI=true
+              python3 --version
+              python3 -m compileall -q Bionic_cloud.py
+              echo "Syntax check passed"
+  tags:
+    onboarding: "true"
